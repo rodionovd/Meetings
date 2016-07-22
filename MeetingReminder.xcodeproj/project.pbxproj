@@ -1,0 +1,340 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A7A101D1D425718007C2E9D /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A7A101C1D425718007C2E9D /* Defaults.plist */; };
+		0A7D08071D40CA8E008A69F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7D08061D40CA8E008A69F9 /* AppDelegate.swift */; };
+		0A7D08091D40CA8E008A69F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A7D08081D40CA8E008A69F9 /* Assets.xcassets */; };
+		0A7D080C1D40CA8E008A69F9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A7D080A1D40CA8E008A69F9 /* MainMenu.xib */; };
+		0A7D08291D41DDDB008A69F9 /* MeetingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7D08271D41DDDB008A69F9 /* MeetingsWindowController.swift */; };
+		0A7D082A1D41DDDB008A69F9 /* MeetingsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A7D08281D41DDDB008A69F9 /* MeetingsWindow.xib */; };
+		0A7D082C1D41E271008A69F9 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7D082B1D41E271008A69F9 /* Meeting.swift */; };
+		0A7D082E1D41E30C008A69F9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7D082D1D41E30C008A69F9 /* Persistence.swift */; };
+		0A7D08321D420EA7008A69F9 /* CheckboxCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7D08311D420EA7008A69F9 /* CheckboxCellView.swift */; };
+		0AE094431D421D3E00F6C7BA /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE094421D421D3E00F6C7BA /* Notifications.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0A7D08261D40CDFC008A69F9 /* Embed XPC Services */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed XPC Services";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0A7A101C1D425718007C2E9D /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
+		0A7D08031D40CA8E008A69F9 /* MeetingReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A7D08061D40CA8E008A69F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0A7D08081D40CA8E008A69F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0A7D080B1D40CA8E008A69F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		0A7D080D1D40CA8E008A69F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A7D08271D41DDDB008A69F9 /* MeetingsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingsWindowController.swift; sourceTree = "<group>"; };
+		0A7D08281D41DDDB008A69F9 /* MeetingsWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeetingsWindow.xib; sourceTree = "<group>"; };
+		0A7D082B1D41E271008A69F9 /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
+		0A7D082D1D41E30C008A69F9 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		0A7D08311D420EA7008A69F9 /* CheckboxCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckboxCellView.swift; sourceTree = "<group>"; };
+		0AE094421D421D3E00F6C7BA /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0A7D08001D40CA8E008A69F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0A7D07FA1D40CA8E008A69F9 = {
+			isa = PBXGroup;
+			children = (
+				0A7D08051D40CA8E008A69F9 /* MeetingReminder */,
+				0A7D08041D40CA8E008A69F9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0A7D08041D40CA8E008A69F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0A7D08031D40CA8E008A69F9 /* MeetingReminder.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0A7D08051D40CA8E008A69F9 /* MeetingReminder */ = {
+			isa = PBXGroup;
+			children = (
+				0A7D08061D40CA8E008A69F9 /* AppDelegate.swift */,
+				0A7D08271D41DDDB008A69F9 /* MeetingsWindowController.swift */,
+				0AE094421D421D3E00F6C7BA /* Notifications.swift */,
+				0AE094451D421FE800F6C7BA /* View */,
+				0AE094441D421FCD00F6C7BA /* Model */,
+				0A7D08081D40CA8E008A69F9 /* Assets.xcassets */,
+				0A7D08281D41DDDB008A69F9 /* MeetingsWindow.xib */,
+				0A7D080A1D40CA8E008A69F9 /* MainMenu.xib */,
+				0A7D080D1D40CA8E008A69F9 /* Info.plist */,
+				0A7A101C1D425718007C2E9D /* Defaults.plist */,
+			);
+			path = MeetingReminder;
+			sourceTree = "<group>";
+		};
+		0AE094441D421FCD00F6C7BA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0A7D082B1D41E271008A69F9 /* Meeting.swift */,
+				0A7D082D1D41E30C008A69F9 /* Persistence.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0AE094451D421FE800F6C7BA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0A7D08311D420EA7008A69F9 /* CheckboxCellView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0A7D08021D40CA8E008A69F9 /* MeetingReminder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A7D08101D40CA8E008A69F9 /* Build configuration list for PBXNativeTarget "MeetingReminder" */;
+			buildPhases = (
+				0A7D07FF1D40CA8E008A69F9 /* Sources */,
+				0A7D08001D40CA8E008A69F9 /* Frameworks */,
+				0A7D08011D40CA8E008A69F9 /* Resources */,
+				0A7D08261D40CDFC008A69F9 /* Embed XPC Services */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MeetingReminder;
+			productName = MeetingReminder;
+			productReference = 0A7D08031D40CA8E008A69F9 /* MeetingReminder.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0A7D07FB1D40CA8E008A69F9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Internals Exposed";
+				TargetAttributes = {
+					0A7D08021D40CA8E008A69F9 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = C6QG5C28K7;
+					};
+				};
+			};
+			buildConfigurationList = 0A7D07FE1D40CA8E008A69F9 /* Build configuration list for PBXProject "MeetingReminder" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0A7D07FA1D40CA8E008A69F9;
+			productRefGroup = 0A7D08041D40CA8E008A69F9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0A7D08021D40CA8E008A69F9 /* MeetingReminder */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0A7D08011D40CA8E008A69F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A7A101D1D425718007C2E9D /* Defaults.plist in Resources */,
+				0A7D08091D40CA8E008A69F9 /* Assets.xcassets in Resources */,
+				0A7D080C1D40CA8E008A69F9 /* MainMenu.xib in Resources */,
+				0A7D082A1D41DDDB008A69F9 /* MeetingsWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0A7D07FF1D40CA8E008A69F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A7D08071D40CA8E008A69F9 /* AppDelegate.swift in Sources */,
+				0A7D082E1D41E30C008A69F9 /* Persistence.swift in Sources */,
+				0A7D08321D420EA7008A69F9 /* CheckboxCellView.swift in Sources */,
+				0A7D082C1D41E271008A69F9 /* Meeting.swift in Sources */,
+				0AE094431D421D3E00F6C7BA /* Notifications.swift in Sources */,
+				0A7D08291D41DDDB008A69F9 /* MeetingsWindowController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0A7D080A1D40CA8E008A69F9 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0A7D080B1D40CA8E008A69F9 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0A7D080E1D40CA8E008A69F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0A7D080F1D40CA8E008A69F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		0A7D08111D40CA8E008A69F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MeetingReminder/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = exposed.internals.MeetingReminder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0A7D08121D40CA8E008A69F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MeetingReminder/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = exposed.internals.MeetingReminder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0A7D07FE1D40CA8E008A69F9 /* Build configuration list for PBXProject "MeetingReminder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A7D080E1D40CA8E008A69F9 /* Debug */,
+				0A7D080F1D40CA8E008A69F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0A7D08101D40CA8E008A69F9 /* Build configuration list for PBXNativeTarget "MeetingReminder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A7D08111D40CA8E008A69F9 /* Debug */,
+				0A7D08121D40CA8E008A69F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0A7D07FB1D40CA8E008A69F9 /* Project object */;
+}
