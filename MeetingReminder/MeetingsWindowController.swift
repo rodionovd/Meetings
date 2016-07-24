@@ -44,7 +44,7 @@ class MeetingsWindowController: NSWindowController, NSTableViewDataSource, NSTab
 
     func acceptUserNotification(notification: NSUserNotification) {
         // Select a meeting in the list when users clicks on a corresponding notification
-        if let idx = meetings.indexOf ({ return $0.notificationIdentifier == notification.identifier }) {
+        if let idx = meetings.indexOf ({ $0.notificationIdentifier == notification.identifier }) {
             window?.makeFirstResponder(tableView)
             tableView.selectRowIndexes(NSIndexSet(index:idx), byExtendingSelection: false)
         }
@@ -102,9 +102,7 @@ class MeetingsWindowController: NSWindowController, NSTableViewDataSource, NSTab
 
         let newModel = oldModel.startedMeeting()
         // Insert the updated model either before the last "started" one...
-        let firstStartedIdx = meetings.indexOf { (meeting) -> Bool in
-            return meeting.started
-        }
+        let firstStartedIdx = meetings.indexOf { $0.started == true }
         // ... or at the very end of the list (if there're no started meetings yet)
         let insertionIdx = firstStartedIdx ?? meetings.endIndex
         meetings.insert(newModel, atIndex: insertionIdx)
