@@ -188,7 +188,7 @@ extension MeetingsWindowController: NSUserNotificationCenterDelegate {
     func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
         return true
     }
-    /// Immediately remove the delivered notification from the notification center
+    /// Select a meeting's row in the table view when user clicks on a related notification 
     func userNotificationCenter(center: NSUserNotificationCenter, didActivateNotification notification: NSUserNotification) {
         acceptUserNotification(notification)
     }
