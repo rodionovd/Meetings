@@ -48,6 +48,7 @@ class MeetingsWindowController: NSWindowController, NSTableViewDataSource, NSTab
             window?.makeFirstResponder(tableView)
             tableView.selectRowIndexes(IndexSet(integer:idx), byExtendingSelection: false)
         }
+        NSUserNotificationCenter.default.removeDeliveredNotification(notification)
     }
 
     @IBAction func addNewMeeting(_ sender: AnyObject?) {
