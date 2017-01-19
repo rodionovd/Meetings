@@ -19,7 +19,7 @@ enum Defaults: String {
 
 /// Fetches all meetings from User Defaults asynchronously
 func fetchMeetings(_ completion: @escaping (([Meeting]) -> Void)) {
-    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+    DispatchQueue.global(qos: .default).async {
         let userDefaults = UserDefaults.standard
         guard let rawMeetings = userDefaults.array(forKey: Defaults.Meetings.rawValue) as? [[String:AnyObject]] else {
             DispatchQueue.main.async {
@@ -37,7 +37,7 @@ func fetchMeetings(_ completion: @escaping (([Meeting]) -> Void)) {
 
 /// Saves all meetings into User Defaults asynchronously
 func saveMeetings(fromArray meetings:[Meeting]) {
-    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+    DispatchQueue.global(qos: .default).async {
         let serializedMeetings  = meetings.map {
             return $0.dictionaryRepresentation()
         }
