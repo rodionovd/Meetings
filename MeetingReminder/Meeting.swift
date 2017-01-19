@@ -13,18 +13,18 @@ import Foundation
 /// notifications together.
 struct Meeting {
     let title: String
-    let date: NSDate
+    let date: Date
     let started: Bool
-    let UUID: NSUUID
+    let UUID: Foundation.UUID
 
-    init(title: String, date: NSDate) {
+    init(title: String, date: Date) {
         self.title = title
         self.date = date
         self.started = false
-        self.UUID = NSUUID()
+        self.UUID = Foundation.UUID()
     }
 
-    init(title: String, date: NSDate, started: Bool, UUID: NSUUID) {
+    init(title: String, date: Date, started: Bool, UUID: Foundation.UUID) {
         self.title = title
         self.date = date
         self.started = started
@@ -39,6 +39,6 @@ struct Meeting {
 extension Meeting: Equatable {}
 
 func ==(lhs: Meeting, rhs: Meeting) -> Bool {
-    return lhs.UUID.isEqualTo(rhs.UUID) && lhs.title == rhs.title && lhs.date == rhs.date &&
+    return (lhs.UUID as NSUUID).isEqual(to: rhs.UUID) && lhs.title == rhs.title && lhs.date == rhs.date &&
         lhs.started == rhs.started
 }

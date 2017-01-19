@@ -18,16 +18,16 @@ enum Defaults: String {
 }
 
 /// Fetches all meetings from User Defaults asynchronously
-func fetchMeetings(completion: ([Meeting] -> Void)) {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        guard let rawMeetings = userDefaults.arrayForKey(Defaults.Meetings.rawValue) as? [[String:AnyObject]] else {
-            dispatch_async(dispatch_get_main_queue()) {
+func fetchMeetings(_ completion: @escaping (([Meeting]) -> Void)) {
+    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+        let userDefaults = UserDefaults.standard
+        guard let rawMeetings = userDefaults.array(forKey: Defaults.Meetings.rawValue) as? [[String:AnyObject]] else {
+            DispatchQueue.main.async {
                 completion([])
             }
             return
         }
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             completion(rawMeetings.map({
                 return Meeting(dictionary: $0)
             }))
@@ -37,12 +37,12 @@ func fetchMeetings(completion: ([Meeting] -> Void)) {
 
 /// Saves all meetings into User Defaults asynchronously
 func saveMeetings(fromArray meetings:[Meeting]) {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
         let serializedMeetings  = meetings.map {
             return $0.dictionaryRepresentation()
         }
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.setObject(serializedMeetings, forKey: Defaults.Meetings.rawValue)
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(serializedMeetings, forKey: Defaults.Meetings.rawValue)
     }
 }
 
@@ -60,7 +60,7 @@ extension Meeting {
             fatalError("Missing or invalid `title` key")
         }
         self.title = aTitle
-        guard let aDate = dictionary["date"] as? NSDate else {
+        guard let aDate = dictionary["date"] as? Date else {
             fatalError("Missing or invalid `date` key")
         }
         self.date = aDate
@@ -68,7 +68,7 @@ extension Meeting {
             fatalError("Missing or invalid `started` key")
         }
         self.started = aStarted.boolValue
-        guard let aUUIDString = dictionary["uuid"] as? String, aUUID = NSUUID(UUIDString: aUUIDString) else {
+        guard let aUUIDString = dictionary["uuid"] as? String, let aUUID = Foundation.UUID(uuidString: aUUIDString) else {
             fatalError("Missing or invalid `uuid` key")
         }
         self.UUID = aUUID
@@ -76,10 +76,10 @@ extension Meeting {
 
     func dictionaryRepresentation() -> [String:AnyObject] {
         return [
-            "title": title,
-            "date": date,
-            "started": NSNumber(bool: started),
-            "uuid": UUID.UUIDString
+            "title": title as AnyObject,
+            "date": date as AnyObject,
+            "started": NSNumber(value: started as Bool),
+            "uuid": UUID.uuidString as AnyObject
         ]
     }
 }

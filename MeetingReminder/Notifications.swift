@@ -12,13 +12,13 @@ import Foundation
 extension Meeting {
     /// Each notification is wired to its own meeting by this identifier (thus it's a 1:1 relation)
     var notificationIdentifier: String {
-        return self.UUID.UUIDString
+        return self.UUID.uuidString
     }
     /// Notifications should arrive in advance before a meeting starts
-    var notificationDate: NSDate {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        let offset = userDefaults.doubleForKey(Defaults.NotificationOffsetSeconds.rawValue)
-        return self.date.dateByAddingTimeInterval(-1 * offset * 60)
+    var notificationDate: Date {
+        let userDefaults = UserDefaults.standard
+        let offset = userDefaults.double(forKey: Defaults.NotificationOffsetSeconds.rawValue)
+        return self.date.addingTimeInterval(-1 * offset * 60) as Date
     }
     
     /// Creates a new notification and schedules it to be delivered before the meeting starts
@@ -36,13 +36,13 @@ extension Meeting {
         notification.actionButtonTitle = NSLocalizedString("Open", comment: "Meeting notification's action button title")
         notification.otherButtonTitle = NSLocalizedString("Dismiss", comment: "Meeting notification's other button title")
 
-        let center = NSUserNotificationCenter.defaultUserNotificationCenter()
+        let center = NSUserNotificationCenter.default
         center.scheduleNotification(notification)
     }
 
     /// Removes a scheduled notification from the notification queue
     func unschedule() {
-        let center = NSUserNotificationCenter.defaultUserNotificationCenter()
+        let center = NSUserNotificationCenter.default
         guard let notification = scheduledNotification() else {
             return
         }
@@ -51,7 +51,7 @@ extension Meeting {
 
     /// Fetches an already scheduled notification for this meeting (if any)
     func scheduledNotification() -> NSUserNotification? {
-        let center = NSUserNotificationCenter.defaultUserNotificationCenter()
+        let center = NSUserNotificationCenter.default
         let matched = center.scheduledNotifications.filter {
             return $0.identifier == self.notificationIdentifier
         }

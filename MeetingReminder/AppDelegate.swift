@@ -14,13 +14,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var meetingsWindowController: MeetingsWindowController?
 
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Register Defaults
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        if let defaultsURL = NSBundle.mainBundle().URLForResource("Defaults", withExtension: "plist"),
-            let dictionary = NSDictionary(contentsOfURL:defaultsURL) as? [String:AnyObject]
+        let userDefaults = UserDefaults.standard
+        if let defaultsURL = Bundle.main.url(forResource: "Defaults", withExtension: "plist"),
+            let dictionary = NSDictionary(contentsOf:defaultsURL) as? [String:AnyObject]
         {
-            userDefaults.registerDefaults(dictionary)
+            userDefaults.register(defaults: dictionary)
         }
         // Create a main window controller
         meetingsWindowController = MeetingsWindowController()

@@ -17,7 +17,7 @@ class MeetingsWindowController: NSWindowController, NSTableViewDataSource, NSTab
     @IBOutlet weak var newMeetingField: NSTextField!
     // Bindings
     @objc var newMeetingTitle: NSString = ""
-    @objc var selectedRows: NSIndexSet = NSIndexSet()
+    @objc var selectedRows: IndexSet = IndexSet()
 
     override var windowNibName: String {
         return "MeetingsWindow"
@@ -27,30 +27,30 @@ class MeetingsWindowController: NSWindowController, NSTableViewDataSource, NSTab
         super.windowDidLoad()
 
         // We're going to handle notifications in a special manner
-        NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
+        NSUserNotificationCenter.default.delegate = self
 
         // Fetch meetings from data source
         fetchMeetings() {
-            self.meetings.appendContentsOf($0)
+            self.meetings.append(contentsOf: $0)
             self.tableView.reloadData()
         }
 
         // Setup dates & co
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        let offset = userDefaults.doubleForKey(Defaults.DefaultMeetingDateOffset.rawValue)
-        dataPicker.dateValue = NSDate(timeIntervalSinceNow: offset).dateWithZeroedSeconds
-        dataPicker.minDate = NSDate().dateWithZeroedSeconds
+        let userDefaults = UserDefaults.standard
+        let offset = userDefaults.double(forKey: Defaults.DefaultMeetingDateOffset.rawValue)
+        dataPicker.dateValue = Date(timeIntervalSinceNow: offset).dateWithZeroedSeconds
+        dataPicker.minDate = Date().dateWithZeroedSeconds
     }
 
-    func acceptUserNotification(notification: NSUserNotification) {
+    func acceptUserNotification(_ notification: NSUserNotification) {
         // Select a meeting in the list when users clicks on a corresponding notification
-        if let idx = meetings.indexOf ({ $0.notificationIdentifier == notification.identifier }) {
+        if let idx = meetings.index (where: { $0.notificationIdentifier == notification.identifier }) {
             window?.makeFirstResponder(tableView)
-            tableView.selectRowIndexes(NSIndexSet(index:idx), byExtendingSelection: false)
+            tableView.selectRowIndexes(IndexSet(integer:idx), byExtendingSelection: false)
         }
     }
 
-    @IBAction func addNewMeeting(sender: AnyObject?) {
+    @IBAction func addNewMeeting(_ sender: AnyObject?) {
         let date = dataPicker.dateValue
         let title = (newMeetingTitle as String).trimmed
         
@@ -61,16 +61,16 @@ class MeetingsWindowController: NSWindowController, NSTableViewDataSource, NSTab
         let model = Meeting(title: title, date: date)
         model.schedule()
 
-        meetings.insert(model, atIndex: 0)
+        meetings.insert(model, at: 0)
         saveMeetings(fromArray: meetings)
 
-        tableView.insertRowsAtIndexes(NSIndexSet(index: 0), withAnimation: .EffectFade)
+        tableView.insertRows(at: IndexSet(integer: 0), withAnimation: .effectFade)
         newMeetingField.stringValue = ""
     }
 
-    @IBAction func removeSelectedMeetings(sender: AnyObject?) {
+    @IBAction func removeSelectedMeetings(_ sender: AnyObject?) {
         var modelsToRemove: [Meeting] = []
-        for (_, idx) in selectedRows.enumerate() {
+        for (_, idx) in selectedRows.enumerated() {
             let model = meetings[idx]
             model.unschedule()
             modelsToRemove.append(model)
@@ -78,40 +78,40 @@ class MeetingsWindowController: NSWindowController, NSTableViewDataSource, NSTab
         meetings = meetings.filter {
             !modelsToRemove.contains($0)
         }
-        tableView.removeRowsAtIndexes(selectedRows, withAnimation: .EffectFade)
+        tableView.removeRows(at: selectedRows, withAnimation: .effectFade)
 
         saveMeetings(fromArray: meetings)
     }
 
-    @IBAction func markMeetingAsStarted(sender: AnyObject?) {
+    @IBAction func markMeetingAsStarted(_ sender: AnyObject?) {
         guard let checkbox = sender as? NSButton else {
             return
         }
-        let row = tableView.rowForView(checkbox)
+        let row = tableView.row(for: checkbox)
         guard row >= 0 && row < meetings.count else {
             return
         }
 
         let oldModel = meetings[row]
-        guard let idx = meetings.indexOf(oldModel) else {
+        guard let idx = meetings.index(of: oldModel) else {
             fatalError("Race conditions I guess ¯\\_(ツ)_/¯")
         }
         // Remove old model object and unschedule any related notifications
-        meetings.removeAtIndex(idx)
+        meetings.remove(at: idx)
         oldModel.unschedule()
 
         let newModel = oldModel.startedMeeting()
         // Insert the updated model either before the last "started" one...
-        let firstStartedIdx = meetings.indexOf { $0.started == true }
+        let firstStartedIdx = meetings.index { $0.started == true }
         // ... or at the very end of the list (if there're no started meetings yet)
         let insertionIdx = firstStartedIdx ?? meetings.endIndex
-        meetings.insert(newModel, atIndex: insertionIdx)
+        meetings.insert(newModel, at: insertionIdx)
         // and update the table view accordingly
         if (meetings.count == 0) {
             tableView.reloadData()
         } else {
-            tableView.moveRowAtIndex(idx, toIndex: insertionIdx)
-            tableView.reloadDataForRowIndexes(NSIndexSet(index:insertionIdx),
+            tableView.moveRow(at: idx, to: insertionIdx)
+            tableView.reloadData(forRowIndexes: IndexSet(integer:insertionIdx),
                                               columnIndexes: tableView.columnIndexes)
         }
 
@@ -120,11 +120,11 @@ class MeetingsWindowController: NSWindowController, NSTableViewDataSource, NSTab
 
     // MARK: - NSTableViewDataSource's -
 
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         return meetings.count
     }
 
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
 
         guard row >= 0 && row < meetings.count else {
             fatalError("It must be numberOfRowsInTableView() reporting an incorrent number of rows")
@@ -135,14 +135,14 @@ class MeetingsWindowController: NSWindowController, NSTableViewDataSource, NSTab
 
         // We have either a label, a date or a boolean value
         var text: String?
-        var date: NSDate?
+        var date: Date?
         var state: Bool?
 
         let model = meetings[row]
         // These are hardcoded but, well, they are hardcoded in IB too so why bother at least for now
         switch column.identifier {
         case "DateColumn":
-            date = model.date
+            date = model.date as Date
         case "TitleColumn":
             text = model.title
         case "StartedColumn":
@@ -152,15 +152,15 @@ class MeetingsWindowController: NSWindowController, NSTableViewDataSource, NSTab
         }
 
         let cellIdentifier = column.identifier + "Cell"
-        guard let view = tableView.makeViewWithIdentifier(cellIdentifier, owner: self) else {
+        guard let view = tableView.make(withIdentifier: cellIdentifier, owner: self) else {
             return nil
         }
         // So we have two default cell views and one custom for checkbox. Probably this peice of code
         // could be beautified a bit but not too much I believe since all these optionals are here to be unwrapped
-        if let cellView = view as? CheckboxCellView, state = state {
+        if let cellView = view as? CheckboxCellView, let state = state {
             cellView.checkbox.state = state ? NSOnState : NSOffState
             if (state) {
-                cellView.checkbox.enabled = false
+                cellView.checkbox.isEnabled = false
             }
         } else if let cellView = view as? NSTableCellView {
             if let text = text {
@@ -171,9 +171,9 @@ class MeetingsWindowController: NSWindowController, NSTableViewDataSource, NSTab
             }
             // "Disable" meetings that have been started already 
             if (model.started) {
-                cellView.textField?.textColor = NSColor.disabledControlTextColor()
+                cellView.textField?.textColor = NSColor.disabledControlTextColor
             } else {
-                cellView.textField?.textColor = NSColor.controlTextColor()
+                cellView.textField?.textColor = NSColor.controlTextColor
             }
         }
 
@@ -183,31 +183,31 @@ class MeetingsWindowController: NSWindowController, NSTableViewDataSource, NSTab
 
 extension MeetingsWindowController: NSUserNotificationCenterDelegate {
     /// Always present notification even when we're the frontmost application
-    func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
+    func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
         return true
     }
     /// Select a meeting's row in the table view when user clicks on a related notification 
-    func userNotificationCenter(center: NSUserNotificationCenter, didActivateNotification notification: NSUserNotification) {
+    func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
         acceptUserNotification(notification)
     }
 }
 
 extension String {
     var trimmed: String {
-        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
 }
 
 extension NSTableView {
-    var columnIndexes: NSIndexSet {
-        return NSIndexSet(indexesInRange: NSMakeRange(0, self.tableColumns.count))
+    var columnIndexes: IndexSet {
+        return IndexSet(integersIn: NSMakeRange(0, self.tableColumns.count).toRange()!)
     }
 }
 
-extension NSDate {
-    var dateWithZeroedSeconds: NSDate {
-        let calendar = NSCalendar.currentCalendar()
-        guard let result = calendar.dateBySettingUnit(.Second, value: 0, ofDate: self, options: .MatchFirst) else {
+extension Date {
+    var dateWithZeroedSeconds: Date {
+        let calendar = Calendar.current
+        guard let result = (calendar as NSCalendar).date(bySettingUnit: .second, value: 0, of: self, options: .matchFirst) else {
             fatalError("Could not set seconds of the date to zero")
         }
         return result
